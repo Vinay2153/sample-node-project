@@ -14,16 +14,22 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up SSH
-      run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan 10.0.0.5 >> ~/.ssh/known_hosts
+      run: |    
+       - apk update && apk add openssh-client bash
+       - mkdir -p ~/.ssh
+       - eval $(ssh-agent -s)
+       - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+       - touch ~/.ssh/config
+       - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+       - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
+
 
     - name: Deploy to VM
       run: |
         ssh pvt-instance@10.0.0.5 << 'EOF'
           cd /home/pvt-instance/deploye
+          ls
+          pwd
           git pull origin main
           # Add any other deployment commands here, e.g.:
           # npm install
