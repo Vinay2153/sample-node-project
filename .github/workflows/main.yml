@@ -1,0 +1,31 @@
+name: Deploy to VM
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan 10.0.0.5 >> ~/.ssh/known_hosts
+
+    - name: Deploy to VM
+      run: |
+        ssh pvt-instance@10.0.0.5 << 'EOF'
+          cd /home/pvt-instance/deploye
+          git pull origin main
+          # Add any other deployment commands here, e.g.:
+          # npm install
+          # pm2 restart all
+        EOF
