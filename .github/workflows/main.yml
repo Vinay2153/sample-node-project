@@ -49,5 +49,6 @@ jobs:
         script: |
           cd /home/pvt-instance/deploye
           pwd
+          touch demo.txt
       #    npm install
       #    npm run start
