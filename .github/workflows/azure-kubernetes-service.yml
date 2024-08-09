@@ -50,6 +50,8 @@ jobs:
     steps:
       # Checks out the repository this file is in
       - uses: actions/checkout@v4
+      - name: Check Azure CLI version
+        run: az --version
 
       # Logs in with your Azure credentials
       - name: Azure login
