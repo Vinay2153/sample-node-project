@@ -35,7 +35,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: "k8sregistery.azurecr.io"
+  AZURE_CONTAINER_REGISTRY: "k8sregistery"
   CONTAINER_NAME: "sample-node"
   RESOURCE_GROUP: "SonnyCRM-POC"
   CLUSTER_NAME: "pvt-cluster"
