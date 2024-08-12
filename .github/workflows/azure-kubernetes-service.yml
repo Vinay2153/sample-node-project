@@ -75,6 +75,11 @@ jobs:
       # Checks out the repository this file is in
       - uses: actions/checkout@v4
 
+          # Set up the PATH environment variable
+      - name: Update PATH
+        run: |
+          echo "/home/gitlab-user/actions-runner/_work/_actions/azure/use-kubelogin/v1/lib:$PATH" >> $GITHUB_ENV
+
       # Logs in with your Azure credentials
       - name: Azure login
         uses: azure/login@v1.4.6
