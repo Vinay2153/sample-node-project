@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nodejs-container
-        image: k8sregistery.azurecr.io/your-nodejs-app:latest
+        image: k8sregistery.azurecr.io/sample-node-project:latest
         ports:
         - containerPort: 3005
         env:
