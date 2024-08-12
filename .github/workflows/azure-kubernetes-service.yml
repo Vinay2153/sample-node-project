@@ -39,7 +39,7 @@ env:
   CONTAINER_NAME: "sample-node-project"
   RESOURCE_GROUP: "SonnyCRM-POC"
   CLUSTER_NAME: "pvt-cluster"
-  DEPLOYMENT_MANIFEST_PATH: "sample-node-project/k8s/"
+  DEPLOYMENT_MANIFEST_PATH: "k8s/"
 
 jobs:
   buildImage:
